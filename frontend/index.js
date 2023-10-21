@@ -22,9 +22,9 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
         return currentMentor.firstName + " " + currentMentor.lastName;
       });
       learner.mentors = mentorNames;
-      createLearnerCards(learners);
-      infoElement.textContent = "No learner is selected";
     });
+    infoElement.textContent = "No learner is selected";
+    createLearnerCards(learners);
     transformedLeaners = learners;
   } catch (error) {
     console.error('Error: ', error);
@@ -46,28 +46,28 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
   function selectLearnerCard(card, learners) {
     // TODO: Add or remove learner's ID from the card
-    let selectedLearnerName = card.children[0].textContent
-    if (selectedLearnerName.indexOf(',') > 0) {
-      selectedLearnerName = selectedLearnerName.slice(selectedLearnerName.indexOf(','));
-      console.log(selectedLearnerName.indexOf(','));
-    }
-    const learnerFullName = learners.find(learner => learner.fullName === selectedLearnerName).fullName
-    const learnerID = learners.find(learner => learner.fullName === selectedLearnerName).id
-    // let learnerNameElement = card.children[0];
-    // console.log(learnerFullName, learnerID);
-    infoElement.textContent = "The selected learner is " + selectedLearnerName
-    let activeCard = document.querySelector('.card.selected');
-    if (card.classList == 'card') {
-      if (activeCard !=null && activeCard != card) {
-        activeCard.classList.remove('selected');
-        // TODO remove ID from previously selected learner
-      }
-      card.classList.add('selected');
-      card.children[0].textContent = `${learnerFullName}, ID ${learnerID}`;
-    } else {
-      card.classList.remove('selected');
-      card.children[0].textContent = `${learnerFullName}`;
-    }
+    // let selectedLearnerName = card.children[0].textContent
+    // if (selectedLearnerName.indexOf(',') > 0) {
+    //   selectedLearnerName = selectedLearnerName.slice(selectedLearnerName.indexOf(','));
+    //   console.log(selectedLearnerName.indexOf(','));
+    // }
+    // const learnerFullName = learners.find(learner => learner.fullName === selectedLearnerName).fullName
+    // const learnerID = learners.find(learner => learner.fullName === selectedLearnerName).id
+    // // let learnerNameElement = card.children[0];
+    // // console.log(learnerFullName, learnerID);
+    // infoElement.textContent = "The selected learner is " + selectedLearnerName
+    // let activeCard = document.querySelector('.card.selected');
+    // if (card.classList == 'card') {
+    //   if (activeCard !=null && activeCard != card) {
+    //     activeCard.classList.remove('selected');
+    //     // TODO remove ID from previously selected learner
+    //   }
+    //   card.classList.add('selected');
+    //   card.children[0].textContent = `${learnerFullName}, ID ${learnerID}`;
+    // } else {
+    //   card.classList.remove('selected');
+    //   card.children[0].textContent = `${learnerFullName}`;
+    // }
   }
 
   function handleClick(event, card) {
@@ -83,6 +83,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   }
 
   function createLearnerCards(learners) {
+    console.log(learners)
     // create learner cards from the learners array
     let cards = document.querySelector('.cards');
     learners.forEach(learner => {
@@ -95,6 +96,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       mentorsHeader.classList.add('closed')
       let mentorsList = document.createElement('ul');
       learner.mentors.forEach(mentor => {
+        // console.log(mentor)
         let mentorName = document.createElement('li');
         mentorName.textContent = mentor;
         mentorsList.appendChild(mentorName);
