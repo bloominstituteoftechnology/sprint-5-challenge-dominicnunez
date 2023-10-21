@@ -1,12 +1,12 @@
 async function sprintChallenge5() { // Note the async keyword, in case you wish to use `await` inside sprintChallenge5
-  // 👇 WORK WORK BELOW THIS LINE 👇
+  // 👇 WORK WORK BELOW THIS LINE 👇transformedLearners
   // Array for the two needed endpoints
   const Endpoints = [
     'http://localhost:3003/api/mentors',
     'http://localhost:3003/api/learners',
   ];
 
-  let transformedLeaners;
+  let transformedLearners;
   let infoElement = document.querySelector('.info')
   
   try {
@@ -25,7 +25,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     });
     infoElement.textContent = "No learner is selected";
     createLearnerCards(learners);
-    transformedLeaners = learners;
+    transformedLearners = learners;
   } catch (error) {
     console.error('Error: ', error);
   }
@@ -94,10 +94,10 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     } else if (clickedElement == mentorHeader && card.classList == 'card') {
       // then call showHideMentors and activateLCard
       toggleMentors(mentorHeader);
-      toggleLearnerCard(card, transformedLeaners);
+      toggleLearnerCard(card, transformedLearners);
     } else {
       // otherwise activate or deactive card
-      toggleLearnerCard(card, transformedLeaners);
+      toggleLearnerCard(card, transformedLearners);
     }
   }
 
