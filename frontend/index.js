@@ -9,8 +9,8 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   const openClass = 'open';
   const closedClass = 'closed';
   const selectedClass = 'selected';
-  const activeCardClassValue = 'card selected';
   const nonActiveCardClass = 'card';
+  const activeCard = 'card selected';
 
   let transformedLearners;
   let infoElement = document.querySelector('.info')
@@ -136,7 +136,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     const mentorHeader = card.children[2]
     let clickedElement = event.target;
     // if clickedelement is mentorHeader and the Learner card is active
-    if (clickedElement == mentorHeader && card.classList == activeCardClassValue) {
+    if (clickedElement == mentorHeader && card.classList == activeCard) {
       // then call showHideMentors
       toggleMentors(mentorHeader);
     // if clickedelement is mentorHeader and the Learner card is not active 
