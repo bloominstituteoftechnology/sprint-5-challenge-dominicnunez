@@ -10,7 +10,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   const closedClass = 'closed';
   const selectedClass = 'selected';
   const cardClass = 'card';
-  const activeCard = `${nonActiveCardClass} ${selectedClass}`;
+  const activeCard = `${cardClass} ${selectedClass}`;
 
   let transformedLearners;
   let infoElement = document.querySelector('.info')
