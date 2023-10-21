@@ -15,6 +15,27 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   let transformedLearners;
   let infoElement = document.querySelector('.info')
 
+  try {
+    const promises = Endpoints.map(url => axios.get(url));
+    const responses = await Promise.all(promises);
+    const [mentorsReponse, learnersResponse] = responses;
+    const mentors = mentorsReponse.data;
+    let learners = learnersResponse.data;
+
+    learners.forEach(learner => {
+      let mentorNames = learner.mentors.map(mentorID => {
+        const currentMentor = mentors.find(mentor => mentor.id === mentorID);
+        return currentMentor.firstName + " " + currentMentor.lastName;
+      });
+      learner.mentors = mentorNames;
+    });
+    infoElementUpdate();
+    createLearnerCards(learners);
+    transformedLearners = learners;
+  } catch (error) {
+    console.error('Error: ', error);
+  }
+
   function infoElementUpdate(name) {
     if (name == undefined) {
         infoElement.textContent = "No learner is selected";
@@ -47,27 +68,6 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       cards.appendChild(card);
       card.addEventListener('click', (event) => handleClick(event, card))
     });
-  }
-
-  try {
-    const promises = Endpoints.map(url => axios.get(url));
-    const responses = await Promise.all(promises);
-    const [mentorsReponse, learnersResponse] = responses;
-    const mentors = mentorsReponse.data;
-    let learners = learnersResponse.data;
-
-    learners.forEach(learner => {
-      let mentorNames = learner.mentors.map(mentorID => {
-        const currentMentor = mentors.find(mentor => mentor.id === mentorID);
-        return currentMentor.firstName + " " + currentMentor.lastName;
-      });
-      learner.mentors = mentorNames;
-    });
-    infoElementUpdate();
-    createLearnerCards(learners);
-    transformedLearners = learners;
-  } catch (error) {
-    console.error('Error: ', error);
   }
 
   function sliceNameFromID(textContent) {
