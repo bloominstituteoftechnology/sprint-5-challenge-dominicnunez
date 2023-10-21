@@ -6,6 +6,12 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     'http://localhost:3003/api/learners',
   ];
 
+  const openClass = 'open';
+  const closedClass = 'closed';
+  const selectedClass = 'selected';
+  const activeCardClass = 'card selected';
+  const nonActiveCardClass = 'card';
+
   let transformedLearners;
   let infoElement = document.querySelector('.info')
 
@@ -22,12 +28,12 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     let cards = document.querySelector('.cards');
     learners.forEach(learner => {
       let card = document.createElement('div');
-      card.classList.add('card');
+      addClassName(card, nonActiveCardClass);
       let nameID = document.createElement('h3');
       let email = document.createElement('div');
       let mentorsHeader = document.createElement('h4');
       mentorsHeader.textContent = "Mentors";
-      mentorsHeader.classList.add('closed')
+      addClassName(mentorsHeader, closedClass);
       let mentorsList = document.createElement('ul');
       learner.mentors.forEach(mentor => {
         let mentorName = document.createElement('li');
@@ -70,8 +76,11 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     return textContent.slice(0, textContent.indexOf(','));
   }
 
-  function removeSelectedClassName(card) {
-    card.classList.remove('selected');
+  function addClassName(element, className) {
+    element.classList.add(className);
+  }
+  function removeClassName(element, className) {
+    element.classList.remove(className);
   }
 
   function toggleLearnerCard(card, learners) {
@@ -93,18 +102,18 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
         // if there is currently an active learner card and it is not the card we selected
         if (activeCard !=null && activeCard != card) {
             // mark the previous learner card as not selected since a new card was clicked
-            removeSelectedClassName(activeCard);
+            removeClassName(activeCard, selectedClass);
             // TODO: remove ID from previously selected learner card
             const previousLearnerName = sliceNameFromID(activeCard.children[0].textContent)
             activeCard.children[0].textContent = previousLearnerName;
       }
       // then mark the clicked card as selected
-      card.classList.add('selected');
+      addClassName(card, selectedClass);
       // append leaner's ID to end of their name
       card.children[0].textContent += `, ID ${learnerID}`;
     } else {
         // otherwise if it was selected it is now unselected
-        removeSelectedClassName(card);
+        removeClassName(card, selectedClass);
         // remove the ID from the end of name
         card.children[0].textContent = selectedLearnerName;
         // update info class element that no learner is selected
@@ -114,12 +123,12 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
   function toggleMentors(mentorHeader) {
     // TODO: set class as open or closed
-    if (mentorHeader.classList == 'closed') {
-      mentorHeader.classList.remove('closed');
-      mentorHeader.classList.add('open');
+    if (mentorHeader.classList == closedClass) {
+      addClassName(mentorHeader, openClass);
+      removeClassName(mentorHeader, closedClass);
     } else {
-      mentorHeader.classList.remove('open');
-      mentorHeader.classList.add('closed');
+      addClassName(mentorHeader, closedClass);
+      removeClassName(mentorHeader, openClass);
     }
   }
   
@@ -127,11 +136,11 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     const mentorHeader = card.children[2]
     let clickedElement = event.target;
     // if clickedelement is mentorHeader and the Learner card is active
-    if (clickedElement == mentorHeader && card.classList == 'card selected') {
+    if (clickedElement == mentorHeader && card.classList == activeCardClass) {
       // then call showHideMentors
       toggleMentors(mentorHeader);
     // if clickedelement is mentorHeader and the Learner card is not active 
-    } else if (clickedElement == mentorHeader && card.classList == 'card') {
+    } else if (clickedElement == mentorHeader && card.classList == nonActiveCardClass) {
       // then call showHideMentors and activateLCard
       toggleMentors(mentorHeader);
       toggleLearnerCard(card, transformedLearners);
