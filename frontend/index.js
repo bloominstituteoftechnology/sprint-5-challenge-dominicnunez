@@ -47,13 +47,13 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   function toggleLearnerCard(card, learners) {
     // Get the current string for the cards first element (IE Name and possibly ID if currently active)
     let selectedLearnerName = card.children[0].textContent
-    // Check if card is active because ID is attached after learner's name
+    // check for index of a comma indicating that the card is currently selected
     if (selectedLearnerName.indexOf(',') != -1) {
         // if the ID exists then we "chop" it off to get the name only
         selectedLearnerName = selectedLearnerName.slice(0, selectedLearnerName.indexOf(','));
     }
     // since selectedLearnerName is actually a variable for text content of that element assign a new variable that is the learners full name from the data
-    const learnerFullName = learners.find(learner => learner.fullName === selectedLearnerName).fullName
+    // const learnerFullName = learners.find(learner => learner.fullName === selectedLearnerName).fullName
     // also get the learners ID from the data
     const learnerID = learners.find(learner => learner.fullName === selectedLearnerName).id
     // Update the info class element to display what learner is selected
@@ -74,12 +74,12 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       // then mark the clicked card as selected
       card.classList.add('selected');
       // append leaner's ID to end of their name
-      card.children[0].textContent = `${learnerFullName}, ID ${learnerID}`;
+      card.children[0].textContent = `${selectedLearnerName}, ID ${learnerID}`;
     } else {
         // otherwise if it was selected it is now unselected
         card.classList.remove('selected');
         // remove the ID from the end of name
-        card.children[0].textContent = `${learnerFullName}`;
+        card.children[0].textContent = `${selectedLearnerName}`;
         // update info class element that no learner is selected
         infoElement.textContent = "No learner is selected";
     }
