@@ -98,7 +98,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     // assign a variable for potentially currently selected learner card
     let activeCard = document.querySelector('.card.selected');
     // if the clicked learner card is not currently selected
-    if (card.classList == 'card') {
+    if (card.classList == cardClass) {
         // if there is currently an active learner card and it is not the card we selected
         if (activeCard !=null && activeCard != card) {
             // mark the previous learner card as not selected since a new card was clicked
