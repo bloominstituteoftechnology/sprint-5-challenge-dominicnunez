@@ -9,8 +9,8 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   const openClass = 'open';
   const closedClass = 'closed';
   const selectedClass = 'selected';
-  const nonActiveCardClass = 'card';
-  const activeCard = 'card selected';
+  const cardClass = 'card';
+  const activeCard = `${nonActiveCardClass} ${selectedClass}`;
 
   let transformedLearners;
   let infoElement = document.querySelector('.info')
@@ -28,7 +28,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     let cards = document.querySelector('.cards');
     learners.forEach(learner => {
       let card = document.createElement('div');
-      addClassName(card, nonActiveCardClass);
+      addClassName(card, cardClass);
       let nameID = document.createElement('h3');
       let email = document.createElement('div');
       let mentorsHeader = document.createElement('h4');
@@ -140,7 +140,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       // then call showHideMentors
       toggleMentors(mentorHeader);
     // if clickedelement is mentorHeader and the Learner card is not active 
-    } else if (clickedElement == mentorHeader && card.classList == nonActiveCardClass) {
+    } else if (clickedElement == mentorHeader && card.classList == cardClass) {
       // then call showHideMentors and activateLCard
       toggleMentors(mentorHeader);
       toggleLearnerCard(card, transformedLearners);
