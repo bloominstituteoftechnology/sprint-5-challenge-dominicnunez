@@ -43,8 +43,9 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       
       nameID.textContent = learner.fullName;
       email.textContent = learner.email;
-      [nameID, email, mentorsHeader, mentorsList].forEach(element => card.appendChild(element))
-      cards.appendChild(card)
+      [nameID, email, mentorsHeader, mentorsList].forEach(element => card.appendChild(element));
+      cards.appendChild(card);
+      card.addEventListener('click', (event) => handleClick(event, card))
     });
   }
 
@@ -68,9 +69,6 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   } catch (error) {
     console.error('Error: ', error);
   }
-  
-  let learnerCards = document.querySelectorAll('.card');
-  learnerCards.forEach(card => card.addEventListener('click', (event) => handleClick(event, card)));
 
   function sliceNameFromID(textContent) {
     return textContent.slice(0, textContent.indexOf(','));
