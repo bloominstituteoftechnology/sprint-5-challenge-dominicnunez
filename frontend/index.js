@@ -36,6 +36,13 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     console.error('Error: ', error);
   }
 
+  function addClassName(element, className) {
+    element.classList.add(className);
+  }
+  function removeClassName(element, className) {
+    element.classList.remove(className);
+  }
+  
   function infoElementUpdate(name) {
     if (name == undefined) {
         infoElement.textContent = "No learner is selected";
@@ -72,13 +79,6 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
   function sliceNameFromID(textContent) {
     return textContent.slice(0, textContent.indexOf(','));
-  }
-
-  function addClassName(element, className) {
-    element.classList.add(className);
-  }
-  function removeClassName(element, className) {
-    element.classList.remove(className);
   }
 
   function toggleLearnerCard(card, learners) {
